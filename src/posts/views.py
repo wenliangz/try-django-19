@@ -18,8 +18,8 @@ def post_list(request):
     return render(request, 'index.html', context)
 
 
-def post_detail(request):
-    instance= get_object_or_404(Post,id=3)
+def post_detail(request,id=None):
+    instance= get_object_or_404(Post,id=id)
     if request.user.is_authenticated():
         context = {
             'title' : 'My User Detail',
