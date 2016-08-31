@@ -29,7 +29,12 @@ Edit application’s models in the admin interface.
 # 4. Mapping URLs to Views
 - two ways of writing url mapping
     - absolute path, better
-    - import view (as ); problem with multile apps with multiple views 
+    - potential problems with multile apps with multiple views; can use "import view as"
+    - In App Views: 
+        - use include function in the main url.py; 
+        - create and define each app's own url.py in each app folder
+        - notice: no '$' sign at the end of url pattern in main folder, in order to delegate the pattern to the app's url patten 
+     
     
     
     
