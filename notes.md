@@ -47,8 +47,11 @@ Template allows us to make webpage smarter, coding more efficient.
 
 # 6. QuerySet Basics
 - Test queryset in shell(data query from data model): python manage.py shell (the django-related python shell)
-- Model Manager: Each Model has a special attribute, called objects by default. This attribute is another class object which encapusulate data from the model and operation methods to perform database queries, such as all(),filter(),create()
-- Use Querryset in our view(view.py) by adding querryset into our context for rendering template
+- Model Manager: Each Model has a special attribute, called objects by default. This attribute is another class object which encapusulate data from the model and operation methods to perform database queries, such as all(),filter(),create(),get()
+    - Use Querryset(e.g. objects.all()) in our view by adding querryset into our context for rendering template on list view
+    - Get Item or 404 Query(e.g. objects.get(id=3)): 
+        - Get one item from queryset and display in detail view if item not exits, 
+        - import get_object_or_404 for display the standard 404 error to prevent from end user to see the exception errors raised by django, e.g. instance= get_object_or_404(Post,id=1)
 
 
 
