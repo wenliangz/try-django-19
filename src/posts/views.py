@@ -1,9 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+
 # Create your views here.
 def post_list(request):
-    return render(request,'index.html',{})
+    if request.user.is_authenticated():
+        context = {
+            'title' : 'My User list'
+        }
+    else:
+        context = {
+            'title' : 'List'
+        }
+        return render(request, 'index.html', context)
+
+
 def post_detail(request):
     return HttpResponse('<h1>detail</h1')
 

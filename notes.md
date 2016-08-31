@@ -39,6 +39,13 @@ Edit application’s models in the admin interface.
 Template allows us to make webpage smarter, coding more efficient.
 - BASE_DIR (settings.py): where the local computer manage.py is
 - TEMPLATE DIR: os.path.join(BASE_DIR,'templates'). 
--  render function to render template and return httpresponse
+- render function to render template and return httpresponse
+- define context to pass variables to render function to render template, which make template more dynamic
+- variable syntax in template: {{variable}}
+- change context or template based on conditions in the view function
+- if we use QuerrySet info for the context, the template will be more dynamic
+
+# 6. QuerySet Basics
+
     
     
