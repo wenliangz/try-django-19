@@ -43,9 +43,14 @@ Template allows us to make webpage smarter, coding more efficient.
 - define context to pass variables to render function to render template, which make template more dynamic
 - variable syntax in template: {{variable}}
 - change context or template based on conditions in the view function
-- if we use QuerrySet info for the context, the template will be more dynamic
+- if we can use data querry from our data model(Querry data) for the context, the template will be more dynamic
 
 # 6. QuerySet Basics
+- Test queryset in shell(data query from data model): python manage.py shell (the django-related python shell)
+- Model Manager: Each Model has a special attribute, called objects by default. This attribute is another class object which encapusulate data from the model and operation methods to perform database queries, such as all(),filter(),create()
+- Use Querryset in our view(view.py) by adding querryset into our context for rendering template
+
+
 
     
     
