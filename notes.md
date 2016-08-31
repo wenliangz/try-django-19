@@ -35,6 +35,10 @@ Edit application’s models in the admin interface.
         - create and define each app's own url.py in each app folder
         - notice: no '$' sign at the end of url pattern in main folder, in order to delegate the pattern to the app's url patten 
      
-    
+# 5. Template
+Template allows us to make webpage smarter, coding more efficient.
+- BASE_DIR (settings.py): where the local computer manage.py is
+- TEMPLATE DIR: os.path.join(BASE_DIR,'templates'). 
+-  render function to render template and return httpresponse
     
     

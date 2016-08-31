@@ -3,8 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def post_list(request):
-    return HttpResponse('<h1>list</h1')
-
+    return render(request,'index.html',{})
 def post_detail(request):
     return HttpResponse('<h1>detail</h1')
 
