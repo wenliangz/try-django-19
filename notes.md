@@ -26,6 +26,10 @@ Edit application’s models in the admin interface.
 - View functions is what the server use to handle the request and return response; so the view function always take request object and return response object(most of the time, the type of response is HttpResponse)
 -  URL.py is used to map each request(url link) to the corresponding view function for handling
     
+# 4. Mapping URLs to Views
+- two ways of writing url mapping
+    - absolute path, better
+    - import view (as ); problem with multile apps with multiple views 
     
     
     
