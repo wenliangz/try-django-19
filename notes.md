@@ -1,12 +1,31 @@
-# Model (model.py)
+# 1. Model (model.py)
 - Define a Model in Django
-# Admin App View for the data in Model: (admin.py)
+
+# 2. Django(Admin App) View for managing data in Model: (admin.py)
 Edit application’s models in the admin interface.
 - register user model
 - customize user model by defining a class
-# User App View for the data in Model: (view.py)
--  CRUD: 
+- this view is for the administrator to use; designed and contributed by Django
+- the view on the admin site could be served as mimic to create our own view
+- URL: /admin/
+
+# 3. Our own View for managing data data in Model: (view.py)
+- this view is for the end user to use
+- URL is controled by controller (URL.py)
+- Model View Controller (MVC)
+- CRUD: 
     - CREATE -- POST --Make new
     - RETRIEVE -- GET -- List/Search
     - UPDATE -- PUT/PATCH --EDIT
     - DELETE -- DELETE --delete
+- Create first View
+- Request&Response Cycle
+    - Request: User click a link on web(different link may have different request)  -- knock the door
+        - GET; POST;PUT; DELETE
+    - Resposne: Sever returns a response  -- answer the door
+- View functions is what the server use to handle the request and return response; so the view function always take request object and return response object(most of the time, the type of response is HttpResponse)
+-  URL.py is used to map each request(url link) to the corresponding view function for handling
+    
+    
+    
+    
