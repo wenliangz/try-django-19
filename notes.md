@@ -57,11 +57,11 @@ Template allows us to make webpage smarter, coding more efficient.
         - import get_object_or_404 for display the standard 404 error to prevent from end user to see the exception errors raised by django, e.g. instance= get_object_or_404(Post,id=1)
 
 
-# Make everything dynamic!
+# Make everything dynamic! CODE for Dynamic
 - Make URL more dynamic:
-    - use Regular expression for RUL routing
-    - named URL
-    - URL links and Get Absolute URL(get_absolute_url)
+    - use Regular expression for RUL routing (from URL to view function)
+    - **named URL**,named in url pattern and passed to the template. One tip for preventing overlap named URLs in the case of multiple webapp: use **namespace** in the include() function in the main url.py to restrict the scope of the named URL in each app. please note if you used namesapce, you will have to write named URL as <namespace:named URL>
+    - URL links and Get Absolute URL(get_absolute_url) (from template to URL)
 - Make View more dynamic:
     - Rendering template with context variables, different kinds variables:
         - user defined variables in context object
@@ -72,7 +72,15 @@ Template allows us to make webpage smarter, coding more efficient.
 
 ------------------------------------------
 #7. Dynamic URL Routing and Pattens
-- Use python regular expressionin for URL patterns such as  r'^detail/(?P<id>\d+)/$'. The variable in the RE will be passed to the view function, which will need to take this variable
+- Use python regular expressionin for URL patterns such as  r'^detail/(?P<id>\d+)/$'. The variable in the RE will be passed to the view function, which will need to take this variable (from URL to view function)
+- make URL links more dynamic ( two ways to prevent hard-coding)
+    - hard-coded links in the template: href = "/posts/{{obj.id}}"
+    - instead of using hard-coded link, used named url, but notice that we still need to pass the variable to URL.  e.g.: href = {% url 'detail' id=obj.id %} (better than hard-coding)
+    - Get Absolute URL (more dynamic solution): defined directly in our model by using get_absolute_url function, to associate the url to the actual model instance itself. In order to prevent hard-coding in the get absolute url function, we need to import django reverse function(from django.core.urlresolvers import reverse) and pass the named url and keyword argument. e.g. instead of return '/posts/%s'%(self.id), we return reverse('detail',kwargs={'id':self.id})
+    
+**IMPORTANT to Remember:**
+ Model instance can not only pass the actual data in the model to the template, but can also pass **user defined function instance** encapsulated in the model manager and can be access the same way as field attribute by dot notation. 
+
 
 
     
