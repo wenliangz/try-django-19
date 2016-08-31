@@ -9,7 +9,7 @@ Edit application’s models in the admin interface.
 - the view on the admin site could be served as mimic to create our own view
 - URL: /admin/
 
-# 3. Our own View for managing data data in Model: (view.py)
+# 3. Our own View for managing data in Model: (view.py)
 - this view is for the end user to use
 - URL is controled by controller (URL.py)
 - Model View Controller (MVC)
@@ -25,6 +25,9 @@ Edit application’s models in the admin interface.
     - Resposne: Sever returns a response  -- answer the door
 - View functions is what the server use to handle the request and return response; so the view function always take request object and return response object(most of the time, the type of response is HttpResponse)
 -  URL.py is used to map each request(url link) to the corresponding view function for handling
+
+
+# -----------------RETRIEVE--------------------
     
 # 4. Mapping URLs to Views
 - two ways of writing url mapping
@@ -70,7 +73,6 @@ Template allows us to make webpage smarter, coding more efficient.
         - 
     - template tag and inheritance
 
-------------------------------------------
 #7. Dynamic URL Routing and Pattens
 - Use python regular expressionin for URL patterns such as  r'^detail/(?P<id>\d+)/$'. The variable in the RE will be passed to the view function, which will need to take this variable (from URL to view function)
 - make URL links more dynamic ( two ways to prevent hard-coding)
@@ -81,7 +83,23 @@ Template allows us to make webpage smarter, coding more efficient.
 **IMPORTANT to Remember:**
  Model instance can not only pass the actual data in the model to the template, but can also pass **user defined function instance** encapsulated in the model manager and can be access the same way as field attribute by dot notation. 
 
+# -----------------CREATE---------------
 
-
-    
-    
+# 8. Model From and Create View
+## Form request:
+- django form is a way for encapasulation of user input data (form class object) to make **a user specific http request**: Form Request
+    - the empty form object can be passed to the context object used for rendering the template: {{ form.as_p }}
+    - the form class object with encapsulated input data can be validated and saved into the data model(model form)
+- In order for the user to submit the form data from the web view, in html in template, you need to wrap form data with the form tags and have an input tag for submission. The form submission by user is also a http request, just like click a link on the web, but the form submission is a request made with encasulated user input data.  
+    - You can specify the request in the **method attribute** of form tag: GET, POST or UPDATE. 
+        - If you don't specify the request, the default request method is the "GET", which is not typical we want if we want to create new data in the model. But in the case of search, 'GET' method is the one the form should use. The form data will be  send into the url address if the method is "GET".
+        - If the request method is 'POST', the form data will be wrapped into the http request object in a dict format. You can capture the data by using request.POST.get(keyword)
+    - The **action attribute** of form tag specifis the URL where the form data should be sent to. If left empty, the default url will the form url itself. But you can also specify a specific URL that you want to go to.
+## FORM Request handling:
+- In order for the server to accept data if the method is "POST": 
+    - it needs security. To do that, you need to specify **CSRF**(Cross Site Request Forgery) token for the form just for the safty reason: {% crsf_token%}
+    - the form data can be captured from request object and save it in the model. However, the form data are usually needed to be validated before you want to capture and save them. 
+        - you can manually capture the data by accessing the **request.POST[somekey]**
+        and validate it by youself (like if statment). The somekey is a string representing the associated html <input name="somekey" />
+        - The django form has built-in validation if you pass the request.POST object to the form class,e.g. form =PostForm(request.POST) and  validated by is_valid method: **form.is_valid(). The validated data will be saved in the form instance, and can be accessed by form.cleaned_data[somekey]** after calling form.save(commit=False) method
+         - the form instance can also be saved to model by calling instance.save() method.

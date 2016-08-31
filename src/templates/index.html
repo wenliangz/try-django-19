@@ -5,6 +5,7 @@
 {#<a href = '/posts/{{ obj.id }}'>{{ obj.title }}</a> </br>#}
 {#<a href = {% url 'detail' id=obj.id %}>{{ obj.title }}</a> </br>#}
 <a href = '{{ obj.get_absolute_url }}'>{{ obj.title }}</a> </br>
+    {{ obj.title }} </br>
     {{ obj.content }} </br>
     {{ obj.timestamp }} </br>
     {{ obj.updated }} </br>
