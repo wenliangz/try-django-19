@@ -1,5 +1,5 @@
-<html>
-<body>
+{%  extends 'base.html' %}
+{% block content %}
 <h1>{{ title }}is working!</h1>
 {% for obj in object_list %}
 {#<a href = '/posts/{{ obj.id }}'>{{ obj.title }}</a> </br>#}
@@ -10,5 +10,4 @@
     {{ obj.timestamp }} </br>
     {{ obj.updated }} </br>
 {% endfor %}
-</body>
-</html>
+{% endblock content %}

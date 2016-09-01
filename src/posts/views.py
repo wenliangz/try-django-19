@@ -17,7 +17,7 @@ def post_list(request):
             'title' : 'List',
             'object_list': queryset
         }
-    return render(request, 'index.html', context)
+    return render(request, 'post_list.html', context)
 
 
 def post_detail(request,id=None):

@@ -126,6 +126,22 @@ Template allows us to make webpage smarter, coding more efficient.
 - to display messages, use the code in django documentation page and paste it in the right place in the post detail template, which will be showed when message is not empty after redirection.
 -  use of message tags
     
-
-
+# ---------------Django Template & Inheritance -------------
+- To make django template system a more dynamic system:
+    - template variable
+    - tags: 
+        - template block tags: {% block content %} anything between the block is a replacable code{%endblock content %}, 
+        - template **inheritance tags** : {% extend 'base.html'%} . make base.html the parent, any blocks below will be replaced with the blocks. Template Inheritance to reduce repetitive codes.
+         - template **include tag**: {%include 'message.html'%}, this is useful to clean up codes in the template. When there are too many common codes in the template, we can seperate them out in a separate file, and include it using include tag in the template.
+- How to make a parent template
+    - Create a base html to be a parent template that every template is going to use with.
+    - Create different blocks in the parent html (base.html), so that the whole block of codes can be replaced with new codes in the same blocks in its child templates. So the idea is that in the parent template,you should make blocks for any codes that you want to be **different** in your child template, but any commond codes outside of blocks. Some useful blocks include:
+        - unique content blocks
+        - unique head blocks
+        - unique style blocks, very cool!
+    - in the child template, use {%extends 'base.html'%} in order to make base.html as a parent template, and use replacable blocks to replace the same block content in the parent template
+ - Note: 
+    - use variable {{block.super}} to show the parent block content,which is useful for page title block. 
+    - For the django message codes, we want it to show in every child template if there are, we can put them in a seperate div class, called messages,outside of any block in the parent template,base.html. We can also separate the codes out in a seperate file and include it.
+    - anything outside of blocks within **the child template** will NOT be rendered! 
  
