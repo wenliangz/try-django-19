@@ -26,6 +26,7 @@ Edit application’s models in the admin interface.
 - View functions is what the server use to handle the request and return response; so the view function always take request object and return response object(most of the time, the type of response is HttpResponse)
 -  URL.py is used to map each request(url link) to the corresponding view function for handling
 
+# ===== Different Type of Views =========
 
 # -----------------RETRIEVE (List/Detail View)--------------------
     
@@ -112,7 +113,9 @@ Template allows us to make webpage smarter, coding more efficient.
 - pass form instance to context for rendering template
 - Same as Create View, we need to redirect to the item detail view after we submit the update form.
 # ------------------- Delete View ------------------
-
+# 10. Delete View is simple, 
+- very similar to update view. Instead of editing it, we just delete it.
+- return and redirect to the url of list view after deletion. we need to import another shortcut function "redirect" function (note this is different from HttpRedirect function)
 
 
 # ---------------Django Message Framework-------------
