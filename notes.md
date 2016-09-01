@@ -111,8 +111,17 @@ Template allows us to make webpage smarter, coding more efficient.
 - **instance of form**: we need the same template(form view) as create view(post_form.html), except that we need to display the model instance data. so we need to pass the model instance to the form class. (e.g. form = PostForm(request.POST or None, instance)
 - pass form instance to context for rendering template
 - Same as Create View, we need to redirect to the item detail view after we submit the update form.
+# ------------------- Delete View ------------------
 
 
+
+# ---------------Django Message Framework-------------
+10.Send a flash message when the form is created or updated successfully.
+- import django.contrib import messages. can be used multiple time e.g. 
+    - in the create view: if form is valid: messages.success(request,'Successfully Created'), if not valid: message.error(request,'Not Successfully Created').
+    -  in the update view: if form is valid: messages.success(request,"Item Saved")
+- to display messages, use the code in django documentation page and paste it in the right place in the post detail template, which will be showed when message is not empty after redirection.
+-  use of message tags
     
 
 
