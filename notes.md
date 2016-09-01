@@ -167,4 +167,9 @@ Template allows us to make webpage smarter, coding more efficient.
         - add {% load staticfiles%} at the top of the template, good to do in the parent template: base.html.
         - use relative path for the link: <link rel="stylesheet" href='{% static "css/base.css" %}'/> 
 
-# --------------- Make our Views more pretty -------------
+# --------------- Make our Views Look Better-------------
+
+# 13. Implement Bootstrap (front end web framework)
+please refer to ipython notebook
+- copy and paste cdn codes from BootStrap web into the parent template, base.html
+- start to use bootstrap format, components etc.
