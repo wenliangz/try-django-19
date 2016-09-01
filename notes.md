@@ -27,7 +27,7 @@ Edit application’s models in the admin interface.
 -  URL.py is used to map each request(url link) to the corresponding view function for handling
 
 
-# -----------------RETRIEVE--------------------
+# -----------------RETRIEVE (List/Detail View)--------------------
     
 # 4. Mapping URLs to Views
 - two ways of writing url mapping
@@ -70,7 +70,6 @@ Template allows us to make webpage smarter, coding more efficient.
         - user defined variables in context object
         - pass variable from URL regular expression to view function
         - pass request object to view function (request context)
-        - 
     - template tag and inheritance
 
 #7. Dynamic URL Routing and Pattens
@@ -83,9 +82,9 @@ Template allows us to make webpage smarter, coding more efficient.
 **IMPORTANT to Remember:**
  Model instance can not only pass the actual data in the model to the template, but can also pass **user defined function instance** encapsulated in the model manager and can be access the same way as field attribute by dot notation. 
 
-# -----------------CREATE---------------
+# -----------------CREATE View---------------
 
-# 8. Model From and Create View
+# 8. Model Form and Create View
 ## Form request:
 - django form is a way for encapasulation of user input data (form class object) to make **a user specific http request**: Form Request
     - the empty form object can be passed to the context object used for rendering the template: {{ form.as_p }}
@@ -103,3 +102,18 @@ Template allows us to make webpage smarter, coding more efficient.
         and validate it by youself (like if statment). The somekey is a string representing the associated html <input name="somekey" />
         - The django form has built-in validation if you pass the request.POST object to the form class,e.g. form =PostForm(request.POST) and  validated by is_valid method: **form.is_valid(). The validated data will be saved in the form instance, and can be accessed by form.cleaned_data[somekey]** after calling form.save(commit=False) method
          - the form instance can also be saved to model by calling instance.save() method.
+- After processing the form, we usually want to redirect to the item detail view, so we import HttpResponseRedirect in view.py, and return HttpResponseRedirect(instance.get_absolute_url()) if form is valid in the post create view.
+         
+# -----------------Update View ---------------
+
+# 9. Instance Update View, what we need in the view:
+- **instance of model**: one instance of data model class, so we need to pass id to the view function.(e.g. instance = get_object_or_404(Post,id=id)
+- **instance of form**: we need the same template(form view) as create view(post_form.html), except that we need to display the model instance data. so we need to pass the model instance to the form class. (e.g. form = PostForm(request.POST or None, instance)
+- pass form instance to context for rendering template
+- Same as Create View, we need to redirect to the item detail view after we submit the update form.
+
+
+    
+
+
+ 
