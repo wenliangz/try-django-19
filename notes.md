@@ -173,3 +173,11 @@ Template allows us to make webpage smarter, coding more efficient.
 please refer to ipython notebook
 - copy and paste cdn codes from BootStrap web into the parent template, base.html
 - start to use bootstrap format, components etc.
+
+# 14. Pagination by QuerySet
+- order post by timestamp
+    - in view.py: queryset.order_by('-timestamp')
+    - or in model itself: add meta class. e.g. class Meta: ordering =['-timestamp','-updated']
+- Using paginatior in a view (see Django documentation for pagination)
+    - code for view function
+    - code for list view template
