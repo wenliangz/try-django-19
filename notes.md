@@ -41,7 +41,7 @@ Edit application’s models in the admin interface.
      
 # 5. Template
 Template allows us to make webpage smarter, coding more efficient.
-- BASE_DIR (settings.py): where the local computer manage.py is
+- BASE_DIR (in settings.py): where the local computer manage.py is
 - TEMPLATE DIR: os.path.join(BASE_DIR,'templates'). 
 - render function to render template and return httpresponse,take three arguments:
     - request object(contains variables from httprequest)
@@ -126,7 +126,8 @@ Template allows us to make webpage smarter, coding more efficient.
 - to display messages, use the code in django documentation page and paste it in the right place in the post detail template, which will be showed when message is not empty after redirection.
 -  use of message tags
     
-# ---------------Django Template & Inheritance -------------
+# --------------- Make our Views more dynamic -------------
+11. Django Template & Inheritance
 - To make django template system a more dynamic system:
     - template variable
     - tags: 
@@ -145,3 +146,25 @@ Template allows us to make webpage smarter, coding more efficient.
     - For the django message codes, we want it to show in every child template if there are, we can put them in a seperate div class, called messages,outside of any block in the parent template,base.html. We can also separate the codes out in a seperate file and include it.
     - anything outside of blocks within **the child template** will NOT be rendered! 
  
+# --------------- Serving Static Files from django  -------------
+# 12. Serving Static files: CSS, Javascript and images. 
+- Normally when we put the Django project in production, we serve the statics files in a different places than the django project itself for the safety purposes. Although during developement, we usually put them in the same place as django project locally for the convinient reason.
+- Serving static files during developement
+    - local static file for development use(settings.py):
+        - STATIC_URL, by default, static/
+        - STATIC_DIRS
+    - set DEBUG = True in settings.py during developement
+    - modify main url.py to append urlpattens when debug=true, so we don't have to worry about later when we bring static files online
+    - make a static folder within the project for serving local static files. We can create subfolder within static folder. 
+- Prepare static files for production
+    - Create and config STATIC_ROOT setting in setting.py for the production use. Note: We want this folder to be seperated with django project folder, so don't want it to be in the BASE_DIR, but one level up. 
+        - STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static_cdn')
+        - physically create the folder, static_cdn, one level up of where manage.py is.(outside of project)
+        - Then, run collectstatic to collect all static files into this central folder, static_cdn, for production use.
+        - MEDIA_ROOT: setup is similar to STATIC_ROOT. This folder for serving any user uploaded files
+- Link static files in the template: <link rel="stylesheet" href="/static/CSS/base.css"/>
+    - to make the link more dynamic:
+        - add {% load staticfiles%} at the top of the template, good to do in the parent template: base.html.
+        - use relative path for the link: <link rel="stylesheet" href='{% static "css/base.css" %}'/> 
+
+# --------------- Make our Views more pretty -------------

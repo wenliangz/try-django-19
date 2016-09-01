@@ -2,6 +2,8 @@ bin/
 include/
 lib/
 pip-selfcheck.json
+static_cdn/
+media_cdn/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
