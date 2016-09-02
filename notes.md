@@ -238,5 +238,13 @@ To prevent non-admin or staff to create a post.
 
 # 20. Associate User to Post with a Foreign Key
 To allow only post creator to edit post:
+- import default django AUTH_USER_MODEL from settings: from djangoconf import settings 
+- change model, by adding ForeignKey: user = models.ForeignKey(settings.AUTH_USER_MODEL,default=1)
+- check admin to see the user information in post
+- add to show Author info in the post detail and list view: Author: {{instance.user}} or {{instance.user.get_full_name}}
+- Modify the post_create view function:
+    - add user validation for permision to create post
+    - add instance.user = request.user if user permitted and form.is_valid before save the form
     
+
 

@@ -46,6 +46,7 @@ def post_create(request):
     form = PostForm(request.POST or None, request.FILES or None) # pass the request.POST object for validation, add 'or None' to prevent from showing validation all the time
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user = request.user
         instance.save()
         messages.success(request,'Post successfully created!')
         return HttpResponseRedirect(instance.get_absolute_url())
