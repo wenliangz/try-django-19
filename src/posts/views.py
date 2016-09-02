@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from urllib.parse import quote_plus
 
 # Create your views here.
 def post_list(request):
@@ -29,29 +30,13 @@ def post_list(request):
 
     return render(request, 'post_list.html', context)
 
-
-def listing(request):
-    contact_list = Contacts.objects.all()
-    paginator = Paginator(contact_list, 25) # Show 25 contacts per page
-
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        contacts = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        contacts = paginator.page(paginator.num_pages)
-
-    return render(request, 'list.html', {'contacts': contacts})
-
-
 def post_detail(request,id=None):
     instance= get_object_or_404(Post,id=id)
+    share_sting =quote_plus(instance.content)
     context = {
             'title' : 'title',
-            'instance': instance
+            'instance': instance,
+            'share_string':share_sting
         }
     return render(request, 'post_detail.html', context)
 

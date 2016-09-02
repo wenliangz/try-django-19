@@ -209,3 +209,13 @@ please refer to ipython notebook
     - import django.db.models.signals.pre_save
     - define a recursive function to make slug
     - pass the function object to pre_save.connect function
+
+# 16. Social Share Links
+- Social Sharing with Anchor Tags( not fully integrated web app), read cfe Guid in github
+    - get the anchor codes from Facebook,Twiter, GooglePlus, LinkedIn, Reddit
+    - Post the codes in the detail view
+    - change the links in the anchor codes to be the links of the page we are at. Use the variable: {{request.build_absolute_url}}
+    - turn our content into the url encoded shared string: 
+        - from urllib.parse import quote_plus
+        - add this to detail view: share_sting =quote_plus(instance.content)
+    
