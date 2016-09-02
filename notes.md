@@ -202,7 +202,7 @@ please refer to ipython notebook
         - define an upload function to return a path string
         - pass the function object to ImageField
         
-# 16. SlugField to improve the url
+# 16. SlugField to improve the url (customized url)
 - define a SlugField in the model
 - change id to slug in the get_absolute_url function
 - define a function to do something(make slug here) before the instance is saved to the model (before save() method is called)
@@ -210,12 +210,24 @@ please refer to ipython notebook
     - define a recursive function to make slug
     - pass the function object to pre_save.connect function
 
-# 16. Social Share Links
+# 17. Social Share Links
 - Social Sharing with Anchor Tags( not fully integrated web app), read cfe Guid in github
     - get the anchor codes from Facebook,Twiter, GooglePlus, LinkedIn, Reddit
     - Post the codes in the detail view
     - change the links in the anchor codes to be the links of the page we are at. Use the variable: {{request.build_absolute_url}}
-    - turn our content into the url encoded shared string: 
+Turn our content into the url encoded shared string: 
         - from urllib.parse import quote_plus
         - add this to detail view: share_sting =quote_plus(instance.content)
-    
+ 
+# 18. Custome Template Tag
+- make a templatetags folder within posts app, and create __init__.py in the folder
+- we are make a customized content urlify filter for social share, that we did using the context variable, share_string. so in the detail template, {{ instance.content |urlify }} will be the same as {{ share_string }}
+
+
+# There are several ways of customize contents:
+- pre-save treatment of contents, like slug fields
+- custom functions for generating context variable
+- use custom Template tag
+
+
+
