@@ -229,5 +229,14 @@ Turn our content into the url encoded shared string:
 - custom functions for generating context variable
 - use custom Template tag
 
+============= User Permission ============
 
+# 19. Basic User Permission
+To prevent non-admin or staff to create a post.
+ - In the post_create,update and delete view function, add user verification.
+ - if not request.user.is_staff or not request.user.is_superuser, then raise 404 error
+
+# 20. Associate User to Post with a Foreign Key
+To allow only post creator to edit post:
+    
 
