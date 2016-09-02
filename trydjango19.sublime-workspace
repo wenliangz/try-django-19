@@ -520,13 +520,10 @@
 	"buffers":
 	[
 		{
-			"contents": "from __future__ import unicode_literals\n\nfrom django.conf import settings\nfrom django.core.urlresolvers import reverse\nfrom django.db import models\nfrom django.db.models.signals import pre_save\nfrom django.utils import timezone\n\nfrom django.utils.text import slugify\n# Create your models here.\n# MVC MODEL VIEW CONTROLLER\n\n\n#Post.objects.all()\n#Post.objects.create(user=user, title=\"Some time\")\n\nclass PostManager(models.Manager):\n    def active(self, *args, **kwargs):\n        # Post.objects.all() = super(PostManager, self).all()\n        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())\n\n\ndef upload_location(instance, filename):\n    #filebase, extension = filename.split(\".\")\n    #return \"%s/%s.%s\" %(instance.id, instance.id, extension)\n    PostModel = instance.__class__\n    new_id = PostModel.objects.order_by(\"id\").last().id + 1\n    \"\"\"\n    instance.__class__ gets the model Post. We must use this method because the model is defined below.\n    Then create a queryset ordered by the \"id\"s of each object, \n    Then we get the last object in the queryset with `.last()`\n    Which will give us the most recently created Model instance\n    We add 1 to it, so we get what should be the same id as the the post we are creating.\n    \"\"\"\n    return \"%s/%s\" %(new_id, filename)\n\nclass Post(models.Model):\n    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)\n    title = models.CharField(max_length=120)\n    slug = models.SlugField(unique=True)\n    image = models.ImageField(upload_to=upload_location, \n            null=True, \n            blank=True, \n            width_field=\"width_field\", \n            height_field=\"height_field\")\n    height_field = models.IntegerField(default=0)\n    width_field = models.IntegerField(default=0)\n    content = models.TextField()\n    draft = models.BooleanField(default=False)\n    publish = models.DateField(auto_now=False, auto_now_add=False)\n    updated = models.DateTimeField(auto_now=True, auto_now_add=False)\n    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)\n\n    objects = PostManager()\n\n    def __unicode__(self):\n        return self.title\n\n    def __str__(self):\n        return self.title\n\n    def get_absolute_url(self):\n        return reverse(\"posts:detail\", kwargs={\"slug\": self.slug})\n\n    class Meta:\n        ordering = [\"-timestamp\", \"-updated\"]\n\n\n\ndef create_slug(instance, new_slug=None):\n    slug = slugify(instance.title)\n    if new_slug is not None:\n        slug = new_slug\n    qs = Post.objects.filter(slug=slug).order_by(\"-id\")\n    exists = qs.exists()\n    if exists:\n        new_slug = \"%s-%s\" %(slug, qs.first().id)\n        return create_slug(instance, new_slug=new_slug)\n    return slug\n\n\ndef pre_save_post_receiver(sender, instance, *args, **kwargs):\n    if not instance.slug:\n        instance.slug = create_slug(instance)\n\n\n\npre_save.connect(pre_save_post_receiver, sender=Post)\n\n\n\n\n\n\n\n\n\n\n",
 			"file": "src/posts/models.py",
-			"file_size": 3020,
-			"file_write_time": 131169607554115756,
 			"settings":
 			{
-				"buffer_size": 2922,
+				"buffer_size": 1973,
 				"line_ending": "Windows"
 			}
 		}
@@ -591,8 +588,7 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Wen.Zhang/MyGit/try-django-19",
-		"/C/Users/Wen.Zhang/MyGit/try-django-19/src"
+		"/Users/jmitch/Desktop/trydjango19"
 	],
 	"file_history":
 	[
@@ -919,15 +915,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2922,
+						"buffer_size": 1973,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1268,
-								1268
+								1429,
+								1429
 							]
 						],
 						"settings":
@@ -937,7 +933,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 342.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

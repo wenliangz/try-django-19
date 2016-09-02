@@ -210,6 +210,11 @@ please refer to ipython notebook
     - define a recursive function to make slug
     - pass the function object to pre_save.connect function
 
+# There are several ways of customize contents:
+- pre-save treatment of contents, like slug fields
+- custom functions for generating context variable
+- use custom Template tag
+
 # 17. Social Share Links
 - Social Sharing with Anchor Tags( not fully integrated web app), read cfe Guid in github
     - get the anchor codes from Facebook,Twiter, GooglePlus, LinkedIn, Reddit
@@ -218,18 +223,31 @@ please refer to ipython notebook
 Turn our content into the url encoded shared string: 
         - from urllib.parse import quote_plus
         - add this to detail view: share_sting =quote_plus(instance.content)
- 
+     
 # 18. Custome Template Tag
 - make a templatetags folder within posts app, and create __init__.py in the folder
 - we are make a customized content urlify filter for social share, that we did using the context variable, share_string. so in the detail template, {{ instance.content |urlify }} will be the same as {{ share_string }}
 
 
-# There are several ways of customize contents:
-- pre-save treatment of contents, like slug fields
-- custom functions for generating context variable
-- use custom Template tag
+# 20. Add Comments (Using Facebook Comments) and like-button:
+Adding comments could be complicated: 
+- due to authentication, registration, and login
+- the other side of it is that threading, span
+This is a simple one here,just using the Facebook social **comment plugin** to allow the authenticate Facebook user to comment on the link. 
+- go to developer page of facebook.com and plugin: Comments Plugin Code Generator
+- generate code and paste 
+    - the first part of code into the base.html; 
+    - the second part of code into post_detail.html for display;change the data-href link
 
-============= User Permission ============
+
+# 21. Post Draft and publication date
+- 
+
+# 22. Search Content:
+- 
+
+
+# ============= User Permission ============
 
 # 19. Basic User Permission
 To prevent non-admin or staff to create a post.
