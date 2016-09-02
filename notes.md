@@ -167,7 +167,7 @@ Template allows us to make webpage smarter, coding more efficient.
         - add {% load staticfiles%} at the top of the template, good to do in the parent template: base.html.
         - use relative path for the link: <link rel="stylesheet" href='{% static "css/base.css" %}'/> 
 
-# --------------- Make our Views Look Better-------------
+# --------------- Improvement: Make our Views Look Better-------------
 
 # 13. Implement Bootstrap (front end web framework)
 please refer to ipython notebook
@@ -201,3 +201,11 @@ please refer to ipython notebook
     - specify where the image uploaded to, dynamically
         - define an upload function to return a path string
         - pass the function object to ImageField
+        
+# 16. SlugField to improve the url
+- define a SlugField in the model
+- change id to slug in the get_absolute_url function
+- define a function to do something(make slug here) before the instance is saved to the model (before save() method is called)
+    - import django.db.models.signals.pre_save
+    - define a recursive function to make slug
+    - pass the function object to pre_save.connect function
