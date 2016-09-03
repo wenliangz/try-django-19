@@ -257,7 +257,12 @@ This is a simple one here,just using the Facebook social **comment plugin** to a
         - link the custom manager to the model
     
 # 22. Search Content:
-- 
+- in the list.html, add a simple search form with method of "GET". the search text will be save in a dict format, with the name of the input tag as key, and the text itself as value.
+    - tip: add attribute of value='{{ request.GET.q }}' to keep the text in the form after submit search button
+- in the post_list veiw function, 
+    - get the input value txt and filter the queryset
+    - Q lookups (complex lookups): import Q from django
+    - watch for the pagination, to make sure the filter still works after click "next " button.need to append {% if request.GET.q %}&q={{ request.GET.q }}{% endif %} to the href link. 
 
 
 # ============= User Permission ============
