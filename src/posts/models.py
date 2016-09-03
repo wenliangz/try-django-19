@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.utils import timezone
 
 
 # Create your models here.
@@ -10,6 +11,11 @@ def upload_location(instance, filename):
     # filebase,extension = filename.split('.')
     return '%s/%s' % (instance.id, filename)
     # return '%s/%s.%s'%(instance.id,instance.id,extension)
+
+class PostManager(models.Manager):
+    def active(self, *args, **kwargs):
+        # Post.objects.all() = super(PostManager, self).all()
+        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
 class Post(models.Model):
@@ -28,6 +34,8 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False,auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    objects = PostManager()  # change the default manager to custom manager
 
     def __unicode__(self):
         return self.title

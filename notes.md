@@ -248,7 +248,14 @@ This is a simple one here,just using the Facebook social **comment plugin** to a
     - BooleanField in the model: draft = models.BooleanField(default=False)
     - publish date field: publish = models.DateField(auto_now=False,aut_now_add=False)
 - change post_detail.html template: <h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
-
+- use Model manager and object filtering for draft publication(we shouldn't see the draft on our list)
+    - one way is to simply filter the object in the view function: Post.objects.filter(draft=False).filter(publish__lte=timezone.now()). Caveats:
+        - what if we want to use other places
+        - the draft should not be seen by others except or the admin users(staff and superuser)
+    - concept of model manager: control how model is working. handle the object a little better than just filter
+        - define a custom manager: class PostManager 
+        - link the custom manager to the model
+    
 # 22. Search Content:
 - 
 
