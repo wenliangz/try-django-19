@@ -7,7 +7,7 @@
 {% if instance.image %}
 <img src='{{ instance.image.url }}' class = 'image-responsive'/>
 {% endif %}
-<h1>{{ title }} <small>{{ instance.timestamp|timesince }} ago</small> </h1>
+<h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
 {%  if instance.get_full_name %}
 <p>Author: {{ instance.get_full_name }}</p>
 {% endif %}

@@ -204,11 +204,14 @@ please refer to ipython notebook
         
 # 16. SlugField to improve the url (customized url)
 - define a SlugField in the model
-- change id to slug in the get_absolute_url function
 - define a function to do something(make slug here) before the instance is saved to the model (before save() method is called)
     - import django.db.models.signals.pre_save
     - define a recursive function to make slug
     - pass the function object to pre_save.connect function
+- corresponding small changes:
+    - change id to slug in the get_absolute_url function in the model
+    - change the url.py pattern from the id to slug
+    - in the corresponding view function, id argument will need to be changed to slug
 
 # There are several ways of customize contents:
 - pre-save treatment of contents, like slug fields
@@ -240,8 +243,11 @@ This is a simple one here,just using the Facebook social **comment plugin** to a
     - the second part of code into post_detail.html for display;change the data-href link
 
 
-# 21. Post Draft and publication date
-- 
+# 21. Post Draft with future publication
+- Add two fields in the Model:
+    - BooleanField in the model: draft = models.BooleanField(default=False)
+    - publish date field: publish = models.DateField(auto_now=False,aut_now_add=False)
+- change post_detail.html template: <h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
 
 # 22. Search Content:
 - 
